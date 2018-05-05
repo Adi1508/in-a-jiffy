@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select the Services!"
+            android:fontFamily="serif-monospace"
+            android:textSize="20dp"
+            android:gravity="center_horizontal"
+            android:padding="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/carpenter_call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get a carpenter" />
+
+            <Button
+                android:id="@+id/plumber_call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get a plumber" />
+
+            <Button
+                android:id="@+id/electrician_call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get an electrician" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
