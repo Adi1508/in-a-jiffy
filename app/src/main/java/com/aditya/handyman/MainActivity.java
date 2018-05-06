@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,22 +17,33 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wangjie.rapidfloatingactionbutton.RapidFloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION = 1;
-    Button carpenter_btn;
+    FloatingActionButton carpenter_btn;
+    FloatingActionButton plumber_btn;
+    FloatingActionButton electrician_btn;
     LocationManager locationManager;
     String lattitude,longitude;
+    TextView txt1, txt2, txt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
+        carpenter_btn = (FloatingActionButton)findViewById(R.id.carpenter_call);
+        plumber_btn = (FloatingActionButton) findViewById(R.id.plumber_call);
+        electrician_btn = (FloatingActionButton) findViewById(R.id.electrician_call);
 
-        carpenter_btn = (Button)findViewById(R.id.carpenter_call);
+        txt1 = findViewById(R.id.txtCarp);
+        txt2 = findViewById(R.id.txtElec);
+        txt3 = findViewById(R.id.txtPlumb);
 
         carpenter_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,11 +59,52 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, PricingActivity.class);
                     intent.putExtra("Location_Data", data);
-                    intent.putExtra("Service",carpenter_btn.getText().toString());
+                    intent.putExtra("Service",txt1.getText().toString());
                     startActivity(intent);
                 }
             }
         });
+
+        plumber_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    buildAlertMessageNoGps();
+
+                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    String data = getLocation();
+                    System.out.println(data);
+                    //api call send the data
+
+                    Intent intent = new Intent(MainActivity.this, PricingActivity.class);
+                    intent.putExtra("Location_Data", data);
+                    intent.putExtra("Service",txt3.getText().toString());
+                    startActivity(intent);
+                }
+            }
+        });
+
+        electrician_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    buildAlertMessageNoGps();
+
+                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    String data = getLocation();
+                    System.out.println(data);
+                    //api call send the data
+
+                    Intent intent = new Intent(MainActivity.this, PricingActivity.class);
+                    intent.putExtra("Location_Data", data);
+                    intent.putExtra("Service",txt2.getText().toString());
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     private String getLocation() {

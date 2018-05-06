@@ -1,5 +1,6 @@
 package com.aditya.handyman;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -55,15 +56,17 @@ public class PricingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(PricingActivity.this, lat + " " + longi + " " + servicev1, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PricingActivity.this, lat + " " + longi + " " + servicev1, Toast.LENGTH_SHORT).show();
 
                 //postService(lat, longi, servicev1);
-                String url = "https://handymanv1.herokuapp.com/api/" + servicev1 + "/" + lat + "/" + longi; //insert api url
+                String url = "https://handymanv1.herokuapp.com/api/" + servicev1 + "/" + lat + "/" + longi+"/"+953311459; //insert api url
 
                 StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         System.out.println("Response " + s);
+                        Intent intent = new Intent(PricingActivity.this, FinalPage.class);
+                        startActivity(intent);
                     }
                 }, new Response.ErrorListener() {
                     @Override
